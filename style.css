@@ -45,3 +45,8 @@ section[title="canvas"] {
     border-width: 1px;
     border-color: var(--primary-action);
 }
+
+.pixel:hover {
+    border-width: 2px;
+    filter: invert(.25);
+}
