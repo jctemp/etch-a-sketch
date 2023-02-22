@@ -1,21 +1,15 @@
+import Canvas from "./js/dimensions.js";
 
-const canvas = document.querySelector("section[title='canvas']");
-for (let index = 0; index < 256; index++) {
-    const pixel = document.createElement("div");
-    pixel.classList.add("pixel");
-    pixel.setAttribute("title", "");
-    canvas.appendChild(pixel);
+// setup canvas
+const canvas = new Canvas();
+canvas.setDimension(16);
 
+const sizeDisplay = document.querySelector("span[title='dimension-display']");
+const sizeSlider = document.querySelector("input[title='dimension-slider']");
 
-    let change = () => pixel.style["backgroundColor"] = "#eb5e28";
+sizeSlider.addEventListener("change", (event) => {
+    const number = event.target.value;
+    canvas.setDimension(number);
+    sizeDisplay.textContent = `${number} x ${number}`
+});
 
-    pixel.addEventListener("mouseover", (event) => {
-        if (event.buttons == 1) {
-            change();
-        }
-    });
-
-    pixel.addEventListener("mousedown", (event) => {
-        change();
-    })
-}
