@@ -1,6 +1,5 @@
 import Canvas from "./js/dimensions.js";
 
-// setup canvas
 const canvas = new Canvas();
 
 const sizeDisplay = document.querySelector("span[title='dimension-display']");
