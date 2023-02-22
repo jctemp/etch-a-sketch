@@ -5,28 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/canvas.css">
+    <link rel="stylesheet" href="./styles/tools.css">
     <script type="module" src="./main.js" defer></script>
     <title>A simple JavaScript pixel editor</title>
 </head>
 
 <body>
     <header>
-        <h1>Pixel Editor</h1>
-        <h2>Create simple graphic using JavaScript DOM manipulation</h2>
+        <div class=".header">
+            <h1>Pixel Editor</h1>
+            <h2>Create simple graphic using JavaScript DOM manipulation</h2>
+        </div>
     </header>
 
     <main>
-        <section title="tools">
+        <section class="container" title="tools">
             <!-- TODO: add a toolbar so that the user can change the grid properties -->
+            <div class="option">
+                <h2>Size</h2>
+                <span>16x16</span>
+                <input type="range" min="16" max="64" value="16">
+            </div>
+            <div class="option">
+                <h2>Color</h2>
+                <span>#000000</span>
+                <input type="color" value="#000000">
+            </div>
+            <div class="option">
+                <h2>Rainbow mode</h2>
+                <input type="checkbox">
+            </div>
         </section>
 
-        <section title="canvas">
+        <section class="container" title="canvas">
             <!-- FILL WITH PIXEL DIV BY JAVASCRIPT -->
         </section>
     </main>
 
-    <footer>
+    <footer class=".footer">
         Some bottom text
     </footer>
 </body>

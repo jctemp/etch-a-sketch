@@ -1,0 +1,20 @@
+section[title="canvas"] {
+    width: min(60ch, 100%);
+    aspect-ratio: 1/1;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+}
+
+.pixel {
+    background-color: white;
+    border-style: dashed;
+    border-width: .0675rem;
+    border-color: #2c2c2c;
+}
+
+.pixel:hover {
+    border-radius: .25rem;
+    border-width: .125rem;
+    filter: invert(.25);
+}
