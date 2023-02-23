@@ -19,3 +19,10 @@ drawColorSelector.addEventListener("change", (event) => {
     canvas.setColor(hex);
     drawColorDisplay.textContent = `${hex}`
 });
+
+const drawColorToggle = document.querySelector("input[title='draw-color-toggle']");
+
+drawColorToggle.addEventListener("change", (event) => {
+    const enabled = event.target.checked;
+    canvas.toggleRainbow(enabled);
+});

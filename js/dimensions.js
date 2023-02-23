@@ -1,6 +1,8 @@
 class Canvas {
-    color = "#000000";
+    prevColor = "";
+    currColor = "#000000";
     element = null;
+    hueDegree = 0;
 
     constructor() {
         this.element = document.querySelector("section[title='canvas']");
@@ -8,16 +10,33 @@ class Canvas {
             throw new Error("Could not find the canvas element. (section[title='canvas'])");
 
         this.setDimension(16);
-        this.setColor(this.color);
+        this.setColor(this.currColor);
         this.clear();
     }
 
-    applyToChildren(callback) {
+    applyToChildren(callback) { 
         for (let index = 0; index < this.element.children.length; index++) {
             const element = this.element.children[index];
             callback(element);
         }
     }
+
+    changeColorEventListener(colorChange) {
+        let over = event => {
+            if (event.buttons == 1)
+                colorChange(event.target);
+        }
+
+        let down = event => colorChange(event.target);
+
+        this.applyToChildren(child => {
+            child.removeEventListener("mouseover", over);
+            child.removeEventListener("mousedown", down);
+
+            child.addEventListener("mouseover", over);
+            child.addEventListener("mousedown", down);
+        });
+    }   
 
     setDimension(number) {
         number = Math.max(16, Math.min(64, number));
@@ -34,38 +53,41 @@ class Canvas {
             pixel.setAttribute("title", "");
             this.element.appendChild(pixel);
 
-            // needed to ignore drag event
             pixel.addEventListener("dragstart", (event) => {
                 event.preventDefault();
             });
         }
 
         this.clear();
-        this.setColor(this.color);
+        this.setColor(this.currColor);
     }
 
     setColor(hex) {
         this.color = hex;
-        this.applyToChildren(child => {
-            let colorChange = (pixel) => pixel.style["backgroundColor"] = this.color;
+        let colorChange = (pixel) => pixel.style["backgroundColor"] = this.currColor;
+        this.changeColorEventListener(colorChange);
+    }
 
-            child.addEventListener("mouseover", (event) => {
-                if (event.buttons == 1) {
-                    colorChange(event.target);
-                }
-            });
+    toggleRainbow(enabled) {
+        if (enabled) {
+            this.hue = true;
+            this.prevColor = this.currColor;
 
-            child.addEventListener("mousedown", (event) => {
-                console.log("down");
-                colorChange(event.target);
-            });
-        })
+            let colorChange = (pixel) => {
+                pixel.style["backgroundColor"] = "#ff0000";
+                pixel.style["filter"] = `hue-rotate(${this.hueDegree}deg)`;
+                this.hueDegree += 10;
+            };
+
+            this.changeColorEventListener(colorChange);
+        } else {
+            this.setColor(this.prevColor);
+        }
     }
 
     clear() {
         this.applyToChildren(child => child.setAttribute("style", ""));
     }
-
 }
 
 export default Canvas;
