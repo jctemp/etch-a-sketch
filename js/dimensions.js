@@ -63,7 +63,7 @@ class Canvas {
     }
 
     setColor(hex) {
-        this.color = hex;
+        this.currColor = hex;
         let colorChange = (pixel) => pixel.style["backgroundColor"] = this.currColor;
         this.changeColorEventListener(colorChange);
     }
@@ -74,7 +74,7 @@ class Canvas {
             this.prevColor = this.currColor;
 
             let colorChange = (pixel) => {
-                pixel.style["backgroundColor"] = "#ff0000";
+                pixel.style["backgroundColor"] = "#ffff00";
                 pixel.style["filter"] = `hue-rotate(${this.hueDegree}deg)`;
                 this.hueDegree += 10;
             };

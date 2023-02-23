@@ -26,3 +26,9 @@ drawColorToggle.addEventListener("change", (event) => {
     const enabled = event.target.checked;
     canvas.toggleRainbow(enabled);
 });
+
+const clearToggle = document.querySelector("button[title='clear-toggle']");
+
+clearToggle.addEventListener("click", (event) => {
+    canvas.clear();
+});
